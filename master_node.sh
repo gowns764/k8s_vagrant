@@ -2,7 +2,7 @@
 
 # 쿠버네티스 시작
 kubeadm init --token 123456.1234567890123456 --token-ttl 0 \
---pod-network-cidr=10.217.0.0/16 --control-plane-endpoint=192.168.1.10 --apiserver-advertise-address=192.168.1.10 
+--pod-network-cidr=10.217.0.0/16 --control-plane-endpoint=192.168.56.1 --apiserver-advertise-address=192.168.56.1 
       
 # 마스터노드 설정
 mkdir -p $HOME/.kube

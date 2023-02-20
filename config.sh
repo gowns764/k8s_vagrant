@@ -47,8 +47,8 @@ sudo modprobe overlay
 sudo sysctl --system
 
 # etc/hosts 설정
-echo "192.168.1.10 master" >> /etc/hosts
-for (( i=1; i<=$1; i++  )); do echo "192.168.1.1$i worker$i" >> /etc/hosts; done
+echo "192.168.56.10 master" >> /etc/hosts
+for (( i=1; i<=$1; i++  )); do echo "192.168.56.1$i worker$i" >> /etc/hosts; done
 
 # DNS 설정
 # config DNS  

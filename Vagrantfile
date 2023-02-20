@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
       vb.customize ["modifyvm", :id, "--groups", "/k8s"]
     end
     cfg.vm.host_name = "master"
-    cfg.vm.network "private_network", ip: "192.168.1.10"
+    cfg.vm.network "private_network", ip: "192.168.56.1"
     cfg.vm.network "forwarded_port", guest: 22, host: 2220, auto_correct: true, id: "ssh"
     cfg.vm.synced_folder "../data", "/vagrant", disabled: true
     cfg.vm.provision "shell", path: "config.sh", args: N
@@ -35,7 +35,7 @@ Vagrant.configure("2") do |config|
         vb.customize ["modifyvm", :id, "--groups", "/k8s"]
       end
       cfg.vm.host_name = "worker#{i}"
-      cfg.vm.network "private_network", ip: "192.168.1.1#{i}"
+      cfg.vm.network "private_network", ip: "192.168.56.1#{i}"
       cfg.vm.network "forwarded_port", guest: 22, host: "222#{i}", auto_correct: true, id: "ssh"
       cfg.vm.synced_folder "../data", "/vagrant", disabled: true
       cfg.vm.provision "shell", path: "config.sh", args: N
