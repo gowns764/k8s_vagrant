@@ -3,20 +3,18 @@
 
 Vagrant.configure("2") do |config|
   N = 2
-
-  config.vm.boot_timeout = 3000
   
   # Master Node #
   config.vm.define "master" do |cfg|
     cfg.vm.box = "ubuntu/focal64"
     cfg.vm.provider "virtualbox" do |vb|
       vb.name = "master"
-      vb.cpus = 2
-      vb.memory = 3072
+      vb.cpus = 4
+      vb.memory = 8192
       vb.customize ["modifyvm", :id, "--groups", "/k8s"]
     end
     cfg.vm.host_name = "master"
-    cfg.vm.network "private_network", ip: "192.168.56.1"
+    cfg.vm.network "private_network", ip: "192.168.56.10"
     cfg.vm.network "forwarded_port", guest: 22, host: 2220, auto_correct: true, id: "ssh"
     cfg.vm.synced_folder "../data", "/vagrant", disabled: true
     cfg.vm.provision "shell", path: "config.sh", args: N
@@ -30,8 +28,8 @@ Vagrant.configure("2") do |config|
       cfg.vm.box = "ubuntu/focal64"
       cfg.vm.provider "virtualbox" do |vb|
         vb.name = "worker#{i}"
-        vb.cpus = 2
-        vb.memory = 2560
+        vb.cpus = 4
+        vb.memory = 8192
         vb.customize ["modifyvm", :id, "--groups", "/k8s"]
       end
       cfg.vm.host_name = "worker#{i}"

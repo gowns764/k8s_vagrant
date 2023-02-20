@@ -35,7 +35,7 @@ sudo ufw disable
 sudo sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config
 sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
 sudo systemctl restart sshd
-sudo systemctl enable aahd
+sudo systemctl enable sshd
 
 # iptable 설정
 cat <<EOF >  /etc/sysctl.d/k8s.conf
