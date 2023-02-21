@@ -4,6 +4,9 @@
 swapoff -a
 sed -i.bak -r 's/(.+ swap .+)/#\1/' /etc/fstab
 
+# 방화벽 끄기
+sudo ufw disable
+
 # Ubuntu 패키지 저장소를 Kakao로 변경
 sudo sed -i 's/archive.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
 
@@ -28,14 +31,11 @@ curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share
 # 헬름 저장소
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
 
-# 방화벽 끄기
-sudo ufw disable
-
 # ssh 설정
 sudo sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config
 sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
-sudo systemctl restart sshd
-sudo systemctl enable sshd
+sudo systemctl restart ssh
+sudo systemctl enable ssh
 
 # iptable 설정
 cat <<EOF >  /etc/sysctl.d/k8s.conf
@@ -47,8 +47,8 @@ sudo modprobe overlay
 sudo sysctl --system
 
 # etc/hosts 설정
-echo "192.168.56.10 master" >> /etc/hosts
-for (( i=1; i<=$1; i++  )); do echo "192.168.56.1$i worker$i" >> /etc/hosts; done
+echo "192.168.1.10 master" >> /etc/hosts
+for (( i=1; i<=$1; i++  )); do echo "192.168.1.1$i worker$i" >> /etc/hosts; done
 
 # DNS 설정
 # config DNS  
