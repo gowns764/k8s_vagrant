@@ -6,7 +6,6 @@ sudo apt install -y vim git net-tools apt-transport-https ca-certificates curl g
 
 # 도커 설치
 sudo apt install -y docker-ce docker-ce-cli containerd.io
-#sed -i '/"cri"/ s/^/#/' /etc/containerd/config.toml
 containerd config default | sudo tee /etc/containerd/config.toml >/dev/null 2>&1
 sudo sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
 sudo systemctl restart containerd

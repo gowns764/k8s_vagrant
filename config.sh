@@ -53,5 +53,6 @@ for (( i=1; i<=$1; i++  )); do echo "192.168.56.1$i worker$i" >> /etc/hosts; don
 # DNS 설정
 # config DNS  
 cat <<EOF > /etc/resolv.conf
-nameserver 8.8.8.8 #Google DNS
+nameserver 1.1.1.1
+nameserver 8.8.8.8
 EOF

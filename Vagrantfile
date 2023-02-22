@@ -10,8 +10,7 @@ Vagrant.configure("2") do |config|
     cfg.vm.provider "virtualbox" do |vb|
       vb.name = "master"
       vb.cpus = 4
-      vb.memory = 8192
-      vb.customize ["modifyvm", :id, "--groups", "/k8s"]
+      vb.memory = 4096
     end
     cfg.vm.host_name = "master"
     cfg.vm.network "private_network", ip: "192.168.56.10"
@@ -28,9 +27,8 @@ Vagrant.configure("2") do |config|
       cfg.vm.box = "ubuntu/focal64"
       cfg.vm.provider "virtualbox" do |vb|
         vb.name = "worker#{i}"
-        vb.cpus = 4
-        vb.memory = 8192
-        vb.customize ["modifyvm", :id, "--groups", "/k8s"]
+        vb.cpus = 2
+        vb.memory = 2048
       end
       cfg.vm.host_name = "worker#{i}"
       cfg.vm.network "private_network", ip: "192.168.56.1#{i}"
