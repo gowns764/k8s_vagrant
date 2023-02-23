@@ -8,7 +8,8 @@ sed -i.bak -r 's/(.+ swap .+)/#\1/' /etc/fstab
 sudo ufw disable
 
 # Ubuntu 패키지 저장소를 Kakao로 변경
-sudo sed -i 's/archive.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
+sudo sed -i 's/kr.archive.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
+sudo sed -i 's/security.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
 
 # 패키지 설치
 sudo apt update -y   
