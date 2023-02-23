@@ -10,6 +10,10 @@ sudo ufw disable
 # Ubuntu 패키지 저장소를 Kakao로 변경
 sudo sed -i 's/archive.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
 
+# 패키지 설치
+sudo apt update -y   
+sudo apt install -y vim git openssh-server net-tools apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+
 # 도커 키
 sudo mkdir -m 0755 -p /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
